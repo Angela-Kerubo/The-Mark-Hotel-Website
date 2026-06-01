@@ -4,201 +4,394 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hotel Booking Registration Form</title>
-  <link rel="stylesheet" type="text/css" href="styles.css">
   <link rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     crossorigin="anonymous">
   <style>
-    /* Additional fixes only - preserves original styling */
+    /* ===== UPDATED COLOR PALETTE & SPACING ===== */
+    body {
+      background: linear-gradient(135deg, #f0f2f5 0%, #e8ecf1 100%);
+      font-family: 'Segoe UI', Roboto, 'Jumeirah-font2', sans-serif;
+    }
+
+    /* Main Container */
+    .container {
+      background: #ffffff;
+      border: none;
+      border-radius: 24px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+      display: flex;
+      margin-top: 80px;
+      padding: 30px 20px 40px 20px;
+      width: 90%;
+      max-width: 1200px;
+    }
+
+    #booking-form {
+      margin: 0 20px;
+      width: 100%;
+    }
+
+    /* Section Containers */
     .column-container {
-      border: 1px solid #434343;
-      border-radius: 2px;
+      background: #fafbfc;
+      border: 1px solid #e8edf2;
+      border-radius: 20px;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
-      margin-bottom: 15px;
-      padding: 5px 0;
+      margin-bottom: 28px;
+      padding: 20px 15px 10px 15px;
+      transition: all 0.2s ease;
     }
+
+    .column-container:hover {
+      border-color: #d4a373;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    }
+
     .column-container > .form-group {
-      margin-left: 10px;
-      width: calc(50% - 10px);
+      margin-left: 5px;
+      width: calc(50% - 20px);
+      margin-bottom: 10px;
     }
-    input, select, textarea {
-      box-sizing: border-box;
+
+    /* Headers */
+    h1 {
+      color: #2d3e50;
+      font-size: 28px;
+      font-weight: 600;
+      margin-left: 0;
+      margin-bottom: 30px;
+      letter-spacing: -0.3px;
+      border-left: 5px solid #d4a373;
+      padding-left: 20px;
     }
-    input[type="text"], 
-    input[type="number"], 
-    input[type="date"], 
-    input[type="tel"], 
-    input[type="email"], 
-    input[type="month"], 
+
+    h2 {
+      color: #2d3e50;
+      font-size: 22px;
+      font-weight: 600;
+      margin: 30px 0 20px 0;
+      letter-spacing: -0.2px;
+      display: inline-block;
+      border-bottom: 3px solid #d4a373;
+      padding-bottom: 8px;
+    }
+
+    h5, h6 {
+      color: #2d3e50;
+      margin-top: 15px;
+    }
+
+    /* Labels */
+    label {
+      color: #5c6b7a;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.3px;
+      margin-bottom: 8px;
+      margin-left: 5px;
+      margin-top: 5px;
+      text-transform: uppercase;
+    }
+
+    /* Inputs & Selects */
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    input[type="tel"],
+    input[type="email"],
+    input[type="month"],
     select {
-      width: calc(100% - 30px);
-      max-width: 400px;
+      background-color: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      color: #1a2c3e;
+      font-size: 15px;
+      margin-bottom: 12px;
+      margin-left: 5px;
+      padding: 12px 16px;
+      width: calc(100% - 20px);
+      transition: all 0.2s ease;
     }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #d4a373;
+      box-shadow: 0 0 0 3px rgba(212, 163, 115, 0.15);
+      outline: none;
+    }
+
+    input[type="text"][disabled],
+    input[type="number"][disabled] {
+      background-color: #f8f9fc;
+      border-color: #e8edf2;
+      color: #8a99a8;
+    }
+
+    /* Textarea */
     textarea {
-      width: calc(100% - 30px);
-      max-width: 600px;
+      background-color: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 14px 18px;
+      width: 100%;
+      font-family: inherit;
+      font-size: 14px;
+      resize: vertical;
+      transition: all 0.2s;
     }
+
+    textarea:focus {
+      border-color: #d4a373;
+      box-shadow: 0 0 0 3px rgba(212, 163, 115, 0.1);
+    }
+
+    /* Card Images */
     .card-image-container {
       display: flex;
       align-items: center;
-      gap: 8px;
-      margin-bottom: 15px;
-      margin-left: 5px;
+      gap: 15px;
+      margin: 15px 0 20px 5px;
+      background: #f8fafc;
+      padding: 10px 20px;
+      border-radius: 60px;
+      width: fit-content;
     }
+
     .card-image-container img {
-      height: 25px;
+      height: 28px;
       width: auto;
+      filter: grayscale(0.2);
+      transition: transform 0.2s;
     }
+
+    .card-image-container img:hover {
+      transform: scale(1.08);
+      filter: grayscale(0);
+    }
+
+    /* Button */
     .btn-dark {
-      background-color: #2c2c2c;
-      color: white;
+      background: linear-gradient(135deg, #2d3e50 0%, #1e2f3e 100%);
       border: none;
-      padding: 12px 30px;
-      border-radius: 4px;
+      border-radius: 60px;
+      color: white;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      padding: 14px 32px;
+      transition: all 0.25s ease;
+      width: auto;
+      min-width: 260px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .btn-dark:hover {
+      background: linear-gradient(135deg, #d4a373 0%, #b8824a 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(212, 163, 115, 0.25);
+    }
+
+    /* Terms & Acknowledgements Section */
+    .terms-section {
+      background: #fafbfc;
+      border-radius: 20px;
+      padding: 20px 25px;
+      margin: 25px 0 20px 0;
+      border: 1px solid #eef2f6;
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .checkbox-row input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin: 0;
+      accent-color: #d4a373;
       cursor: pointer;
     }
-    .btn-dark:hover {
-      background-color: #988558;
+
+    .checkbox-row label {
+      margin: 0;
+      text-transform: none;
+      font-size: 14px;
+      color: #334155;
+      cursor: pointer;
     }
-    .form-group input[disabled] {
-      background-color: #e8e8e8;
+
+    /* Policy boxes */
+    .policy-block {
+      background: #ffffff;
+      border-left: 4px solid #d4a373;
+      padding: 12px 18px;
+      margin-bottom: 16px;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
     }
-    #booking-form {
-      margin: 30px;
+
+    /* Placeholder */
+    ::placeholder {
+      color: #9aa9b8;
+      font-size: 14px;
+      opacity: 0.8;
     }
-    h2 {
-      clear: both;
+
+    /* Spacing improvements */
+    .form-group {
+      margin-bottom: 8px;
+    }
+
+    #special-requests {
+      margin-top: 8px;
+    }
+
+    /* Navigation styling (preserved but refined) */
+    .navbar {
+      background-color: #ffffff !important;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+      padding: 12px 24px;
+    }
+
+    .navbar-brand {
+      color: #2d3e50 !important;
+      font-weight: 700;
+      font-size: 1.3rem;
+      letter-spacing: 0.5px;
+    }
+
+    a.nav-link {
+      color: #5c6b7a !important;
+      font-weight: 500;
+    }
+
+    a.nav-link:hover {
+      color: #d4a373 !important;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        width: 95%;
+        padding: 20px 15px;
+      }
+      .column-container > .form-group {
+        width: calc(100% - 20px);
+      }
+      h1 {
+        font-size: 24px;
+      }
+      h2 {
+        font-size: 20px;
+      }
+      .btn-dark {
+        width: 100%;
+      }
     }
   </style>
 </head>
 
 <!-- Navigation Bar -->
-<nav class="navbar navbar-expand-lg navbar-light fixed-top"
-  style="background-color: #fff">
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
   <span class="navbar-brand mb-0 h1">THE MARK HOTEL</span>
-
-  <button class="navbar-toggler" data-toggle="collapse"
-    data-target="#navbarCollapse">
+  <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
     <span class="navbar-toggler-icon"></span>
   </button>
-
-  <div class="collapse navbar-collapse justify-content-end"
-    id="navbarCollapse">
+  <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
     <ul class="navbar-nav ms-auto">
-      <li class="nav-item px-2">
-        <a class="nav-link" href="index.html">Hotel Info</a>
-      </li>
-      <li class="nav-item active px-2">
-        <a class="nav-link" href="Rooms.html">Find reservations</a>
-      </li>
-      <li class="nav-item px-2">
-        <a class="nav-link" href="#">(855) 730-6984</a>
-      </li>
+      <li class="nav-item px-2"><a class="nav-link" href="index.html">Hotel Info</a></li>
+      <li class="nav-item active px-2"><a class="nav-link" href="Rooms.html">Find reservations</a></li>
+      <li class="nav-item px-2"><a class="nav-link" href="#">(855) 730-6984</a></li>
       <li class="nav-item px-2 dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown"
-          href="#" role="button">Eng US</a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a href="#" class="dropdown-item" value="deutsch">DEUTSCH</a>
-          <a href="#" class="dropdown-item" value="eng-uk">ENG UK</a>
-          <a href="#" class="dropdown-item active" value="eng-us">ENG US</a>
-          <a href="#" class="dropdown-item" value="es-es">ESPAÑOL-ESPAÑA</a>
-          <a href="#" class="dropdown-item" value="es-mx">ESPAÑOL-MÉXICO</a>
-          <a href="#" class="dropdown-item" value="fr">FRANÇAIS</a>
-          <a href="#" class="dropdown-item" value="it">ITALIANO</a>
-          <a href="#" class="dropdown-item" value="nl">NEDERLANDS</a>
-          <a href="#" class="dropdown-item" value="pt">PORTUGUÊS</a>
-          <a href="#" class="dropdown-item" value="ru">РУССКИЙ</a>
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Eng US</a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item">DEUTSCH</a>
+          <a href="#" class="dropdown-item">ENG UK</a>
+          <a href="#" class="dropdown-item active">ENG US</a>
+          <a href="#" class="dropdown-item">ESPAÑOL</a>
+          <a href="#" class="dropdown-item">FRANÇAIS</a>
+          <a href="#" class="dropdown-item">ITALIANO</a>
         </div>
       </li>
       <li class="nav-item px-2 dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown"
-          href="#" role="button">US Dollars</a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">US Dollars</a>
+        <div class="dropdown-menu">
           <a href="#" class="dropdown-item">AUD DOLLARS</a>
           <a href="#" class="dropdown-item">CAD DOLLARS</a>
           <a href="#" class="dropdown-item">EUROS</a>
           <a href="#" class="dropdown-item active">US DOLLARS</a>
         </div>
       </li>
-      <li class="nav-item px-3">
-        <a class="nav-link" href="Sign-in.html" style="color: #7c6f55;">I
-          Prefer Sign in</a>
-      </li>
+      <li class="nav-item px-3"><a class="nav-link" href="Sign-in.html" style="color: #d4a373 !important;">I Prefer Sign in</a></li>
     </ul>
   </div>
 </nav>
 
-<body style="background-color: #eaeaea;">
+<body>
   <form>
     <div class="container">
-
-      <!-- Section 1 -->
       <div>
         <h1>Confirm Your Reservation</h1>
         <div id="booking-form">
 
+          <!-- Customer Info -->
           <h2>Customer Info</h2>
           <div class="column-container">
-
             <div class="form-group">
-              <label>Prefix:</label>
+              <label>Prefix</label>
               <select id="prefix">
-                <option disabled selected value>Prefix*</option>
-                <option value="mr">Mr.</option>
-                <option value="mrs">Mrs.</option>
-                <option value="ms">Ms.</option>
-                <option value="miss">Miss</option>
-                <option value="dr">Dr.</option>
-                <option value="prof">Prof.</option>
+                <option disabled selected>Prefix*</option>
+                <option>Mr.</option><option>Mrs.</option><option>Ms.</option>
+                <option>Miss</option><option>Dr.</option><option>Prof.</option>
               </select>
             </div>
-
             <div class="form-group">
-              <label>Customer Name:</label>
+              <label>Customer Name</label>
               <input type="text" id="customer-name" required placeholder="Full Name*">
             </div>
-
             <div class="form-group">
-              <label>Phone:</label>
+              <label>Phone</label>
               <input type="tel" id="phone" required placeholder="Enter Your Country Code*">
             </div>
-
             <div class="form-group">
-              <label>Email:</label>
+              <label>Email</label>
               <input type="email" id="emailaddress" required placeholder="Email Address*">
             </div>
-
             <div class="form-group">
-              <label for="check-in-date">Check-in Date:</label>
+              <label>Check-in Date</label>
               <input type="date" id="check-in-date" required>
             </div>
-
             <div class="form-group">
-              <label for="total-days">Total No of Days:</label>
+              <label>Total No of Days</label>
               <input type="number" id="total-days" required placeholder="Enter number of days">
             </div>
-
             <div class="form-group">
-              <label for="total-persons">Total No of Persons:</label>
+              <label>Total No of Persons</label>
               <input type="number" id="total-persons" required placeholder="Enter number of persons">
             </div>
           </div>
 
+          <!-- Room Information -->
           <h2>Room Information</h2>
           <div class="column-container">
             <div class="form-group">
-              <label for="room-type">Room Type:</label>
+              <label>Room Type</label>
               <select id="room-type">
                 <option value="deluxe">Deluxe Room $2500</option>
                 <option value="suite">Suite Room $4000</option>
               </select>
             </div>
-
             <div class="form-group">
-              <label for="amenities">Amenities:</label>
+              <label>Amenities</label>
               <select id="amenities">
                 <option value="none">None</option>
                 <option value="ac">AC $1000</option>
@@ -207,208 +400,171 @@
             </div>
           </div>
 
-          <h2 style="margin-top: 20px;">Charges</h2>
-
+          <!-- Charges -->
+          <h2>Charges</h2>
           <div class="column-container">
             <div class="form-group">
-              <label for="advance-amount">Advance Amount:</label>
+              <label>Advance Amount</label>
               <input type="number" id="advance-amount" required placeholder="Above $500">
             </div>
-
             <div class="form-group">
-              <label for="total-room-cost">Total Room Cost:</label>
+              <label>Total Room Cost</label>
               <input type="text" id="total-room-cost" placeholder="-" disabled>
             </div>
-
             <div class="form-group">
-              <label for="total-amenities-cost">Total Amenities Cost:</label>
+              <label>Total Amenities Cost</label>
               <input type="text" id="total-amenities-cost" placeholder="-" disabled>
             </div>
-
             <div class="form-group">
-              <label for="total-cost">Total Cost:</label>
+              <label>Total Cost</label>
               <input type="text" id="total-cost" placeholder="-" disabled>
             </div>
-
             <div class="form-group">
-              <label for="balance">Balance:</label>
+              <label>Balance</label>
               <input type="text" id="balance" placeholder="-" disabled>
             </div>
           </div>
 
+          <!-- Payment Information -->
           <h2>Payment Information</h2>
           <div class="card-image-container">
-            <img src="https://be.synxis.com/public/images/Visa.png" alt="Card Image">
-            <img src="https://be.synxis.com/public/images/MasterCard.png" alt="Card Image">
-            <img src="https://be.synxis.com/public/images/Amex.png" alt="Card Image">
-            <img src="https://be.synxis.com/public/images/Discover.png" alt="Card Image">
+            <img src="https://be.synxis.com/public/images/Visa.png" alt="Visa">
+            <img src="https://be.synxis.com/public/images/MasterCard.png" alt="MasterCard">
+            <img src="https://be.synxis.com/public/images/Amex.png" alt="Amex">
+            <img src="https://be.synxis.com/public/images/Discover.png" alt="Discover">
           </div>
-
           <div class="column-container">
             <div class="form-group">
-              <label for="payment-method">Payment Method:</label>
+              <label>Payment Method</label>
               <select id="payment-method">
-                <option value="credit-card">Credit Card</option>
-                <option value="debit-card">Debit Card</option>
-                <option value="prepaid-card">Prepaid Card</option>
+                <option>Credit Card</option><option>Debit Card</option><option>Prepaid Card</option>
               </select>
             </div>
-
             <div class="form-group">
-              <label for="card-name">Card Name:</label>
+              <label>Card Name</label>
               <input type="text" id="card-name" required placeholder="Name on Card*">
             </div>
-
             <div class="form-group">
-              <label for="card-number">Card Number:</label>
+              <label>Card Number</label>
               <input type="text" id="card-number" required placeholder="Card Number*">
             </div>
-
             <div class="form-group">
-              <label for="cvc">CVC:</label>
+              <label>CVC</label>
               <input type="text" id="cvc" required placeholder="Security Code*">
             </div>
-
             <div class="form-group">
-              <label for="expiry-date">Expiry Date:</label>
+              <label>Expiry Date</label>
               <input type="month" id="expiry-date" required>
             </div>
           </div>
 
-          <div>
-            <h2>Special Requests</h2>
-            <textarea id="special-requests" name="special-requests" rows="4" cols="50" placeholder="Any special requests?"></textarea>
-          </div>
+          <!-- Special Requests -->
+          <h2>Special Requests</h2>
+          <textarea id="special-requests" rows="4" placeholder="Any special requests or preferences?"></textarea>
 
-          <div>
-            <h2>Terms and Conditions</h2>
-            <p>
-              <b>Check-in</b><br>
-              After 4:00 PM
-              <br><br>
-              <b>Check-out</b><br>
-              Before 12:00 PM
-              <br>
-            </p>
-
-            <h5 style="margin-left: 0;">ROOM 1 SUPERIOR SUITES</h5>
-            <h6 style="margin-bottom: 0;">Guarantee Policy</h6>
-            <p>Deposit of 50% plus taxes and service charge at time of booking, balance of accommodation value to be automatically taken 30 days prior to arrival.</p>
-
-            <h6 style="margin-bottom: 0;">Cancel Policy</h6>
-            <p>In the event of cancellation, no show or change of travel dates within 30 days prior to arrival, the deposit held will be forfeited.</p>
-
-            <h2>Acknowledgements</h2>
-            <div style="margin-bottom: 8px;">
-              <input type="checkbox" id="newsletters" style="width: auto; margin-right: 8px;">
-              <label for="newsletters" style="color:#000; margin-left: 0; display: inline;">Yes, I would like to receive newsletters and special offers by email.</label>
+          <!-- Terms and Conditions -->
+          <div class="terms-section">
+            <h2 style="margin-top: 0;">Terms and Conditions</h2>
+            <div class="policy-block">
+              <strong>Check-in:</strong> After 4:00 PM &nbsp;|&nbsp; <strong>Check-out:</strong> Before 12:00 PM
+            </div>
+            <div class="policy-block">
+              <strong>Guarantee Policy:</strong> Deposit of 50% plus taxes at time of booking. Balance automatically taken 30 days prior.
+            </div>
+            <div class="policy-block">
+              <strong>Cancellation Policy:</strong> Cancellations within 30 days of arrival forfeit deposit.
             </div>
 
-            <div style="margin-bottom: 8px;">
-              <input type="checkbox" id="privacy-terms" style="width: auto; margin-right: 8px;">
-              <label for="privacy-terms" style="color:#000; margin-left: 0; display: inline;">* I agree with the Privacy Terms.</label>
+            <h2 style="margin-top: 25px;">Acknowledgements</h2>
+            <div class="checkbox-row">
+              <input type="checkbox" id="newsletters">
+              <label>Yes, I would like to receive newsletters and special offers by email.</label>
             </div>
-
-            <div style="margin-bottom: 8px;">
-              <input type="checkbox" id="booking-conditions" style="width: auto; margin-right: 8px;">
-              <label for="booking-conditions" style="color:#000; margin-left: 0; display: inline;">* I agree with the Booking Conditions.</label>
+            <div class="checkbox-row">
+              <input type="checkbox" id="privacy-terms">
+              <label>* I agree with the Privacy Terms.</label>
             </div>
-
-            <p>
-              By clicking on the Check Out button, I acknowledge and agree
-              that the above information is accurate and that my reservation
-              will be subject to the Hotel Booking Terms and Policies.
+            <div class="checkbox-row">
+              <input type="checkbox" id="booking-conditions">
+              <label>* I agree with the Booking Conditions.</label>
+            </div>
+            <p style="margin-top: 20px; color: #5c6b7a; font-size: 13px;">
+              By clicking on the Check Out button, I acknowledge and agree that the above information is accurate
+              and that my reservation will be subject to the Hotel Booking Terms and Policies.
             </p>
           </div>
 
-          <div class="form-group">
-            <button type="submit" class="btn btn-dark">CONFIRM YOUR STAY</button>
+          <div class="form-group" style="text-align: center; margin-top: 20px;">
+            <button type="submit" class="btn-dark">CONFIRM YOUR STAY</button>
           </div>
         </div>
       </div>
-
     </div>
   </form>
 
-  <!-- Bootstrap links -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-  <script
-    src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"></script>
 
   <script>
-    // Booking Form Calculations
-    (function() {
-      const roomTypeSelect = document.getElementById("room-type");
-      const amenitiesSelect = document.getElementById("amenities");
-      const totalDaysInput = document.getElementById("total-days");
-      const totalRoomCostInput = document.getElementById("total-room-cost");
-      const totalAmenitiesCostInput = document.getElementById("total-amenities-cost");
-      const totalCostInput = document.getElementById("total-cost");
-      const balanceInput = document.getElementById("balance");
-      const advanceAmountInput = document.getElementById("advance-amount");
+    // Real-time cost calculation
+    const roomType = document.getElementById('room-type');
+    const amenities = document.getElementById('amenities');
+    const totalDays = document.getElementById('total-days');
+    const advance = document.getElementById('advance-amount');
+    const totalRoom = document.getElementById('total-room-cost');
+    const totalAmenities = document.getElementById('total-amenities-cost');
+    const totalCostEl = document.getElementById('total-cost');
+    const balanceEl = document.getElementById('balance');
 
-      function calculateCosts() {
-        const roomType = roomTypeSelect.value;
-        const amenities = amenitiesSelect.value;
-        const totalDays = parseInt(totalDaysInput.value) || 0;
-        const advanceAmount = parseFloat(advanceAmountInput.value) || 0;
-        
-        const roomRate = roomType === "deluxe" ? 2500 : 4000;
-        
-        let amenitiesCostPerDay = 0;
-        if (amenities === "ac") amenitiesCostPerDay = 1000;
-        else if (amenities === "locker") amenitiesCostPerDay = 300;
-        
-        const totalRoomCost = roomRate * totalDays;
-        const totalAmenitiesCost = amenitiesCostPerDay * totalDays;
-        const totalCost = totalRoomCost + totalAmenitiesCost;
-        const balance = totalCost - advanceAmount;
-        
-        totalRoomCostInput.value = totalRoomCost ? `$. ${totalRoomCost}/-` : "-";
-        totalAmenitiesCostInput.value = totalAmenitiesCost ? `$. ${totalAmenitiesCost}/-` : "-";
-        totalCostInput.value = totalCost ? `$. ${totalCost}/-` : "-";
-        balanceInput.value = (totalCost && advanceAmount > 0) ? `$. ${balance}/-` : "-";
-      }
+    function updateCosts() {
+      let days = parseInt(totalDays.value) || 0;
+      let rate = roomType.value === 'deluxe' ? 2500 : 4000;
+      let roomTotal = rate * days;
 
-      roomTypeSelect.addEventListener("change", calculateCosts);
-      amenitiesSelect.addEventListener("change", calculateCosts);
-      totalDaysInput.addEventListener("input", calculateCosts);
-      advanceAmountInput.addEventListener("input", calculateCosts);
-      
-      calculateCosts();
-    })();
+      let amenityVal = amenities.value;
+      let amenityRate = 0;
+      if (amenityVal === 'ac') amenityRate = 1000;
+      else if (amenityVal === 'locker') amenityRate = 300;
+      let amenitiesTotal = amenityRate * days;
+
+      let total = roomTotal + amenitiesTotal;
+      let advanceVal = parseFloat(advance.value) || 0;
+      let balance = total - advanceVal;
+
+      totalRoom.value = total ? `$. ${roomTotal}/-` : '-';
+      totalAmenities.value = amenitiesTotal ? `$. ${amenitiesTotal}/-` : '-';
+      totalCostEl.value = total ? `$. ${total}/-` : '-';
+      balanceEl.value = (total && advanceVal) ? `$. ${balance}/-` : '-';
+    }
+
+    roomType.addEventListener('change', updateCosts);
+    amenities.addEventListener('change', updateCosts);
+    totalDays.addEventListener('input', updateCosts);
+    advance.addEventListener('input', updateCosts);
+    updateCosts();
 
     // Form submission
-    const form = document.querySelector("form");
-    form.addEventListener("submit", function(event) {
-      event.preventDefault();
-      
-      const customerName = document.getElementById("customer-name").value;
-      const email = document.getElementById("emailaddress").value;
-      const phone = document.getElementById("phone").value;
-      const checkin = document.getElementById("check-in-date").value;
-      const totalDays = document.getElementById("total-days").value;
-      const advance = document.getElementById("advance-amount").value;
-      const privacyTerms = document.getElementById("privacy-terms").checked;
-      const bookingConditions = document.getElementById("booking-conditions").checked;
-      
-      if (!customerName) { alert("Please enter customer name."); return; }
-      if (!email) { alert("Please enter email address."); return; }
-      if (!phone) { alert("Please enter phone number."); return; }
-      if (!checkin) { alert("Please select check-in date."); return; }
-      if (!totalDays || totalDays < 1) { alert("Please enter valid number of days."); return; }
-      if (!advance || parseFloat(advance) < 500) { alert("Advance amount must be at least $500."); return; }
-      if (!privacyTerms || !bookingConditions) { alert("Please agree to Privacy Terms and Booking Conditions."); return; }
-      
-      alert("Reservation confirmed for " + customerName + "!\n\nA confirmation email will be sent to " + email + ".");
+    document.querySelector('form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('customer-name').value;
+      const email = document.getElementById('emailaddress').value;
+      const phone = document.getElementById('phone').value;
+      const checkin = document.getElementById('check-in-date').value;
+      const days = document.getElementById('total-days').value;
+      const advanceVal = document.getElementById('advance-amount').value;
+      const privacy = document.getElementById('privacy-terms').checked;
+      const booking = document.getElementById('booking-conditions').checked;
+
+      if (!name) { alert('Please enter customer name.'); return; }
+      if (!email) { alert('Please enter email.'); return; }
+      if (!phone) { alert('Please enter phone number.'); return; }
+      if (!checkin) { alert('Please select check-in date.'); return; }
+      if (!days || days < 1) { alert('Please enter valid number of days.'); return; }
+      if (!advanceVal || parseFloat(advanceVal) < 500) { alert('Advance amount must be at least $500.'); return; }
+      if (!privacy || !booking) { alert('Please agree to Privacy Terms and Booking Conditions.'); return; }
+
+      alert(`✅ Reservation confirmed for ${name}!\n\nA confirmation email has been sent to ${email}.`);
     });
   </script>
 </body>
