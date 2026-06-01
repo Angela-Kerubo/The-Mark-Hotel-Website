@@ -9,6 +9,70 @@
     href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     crossorigin="anonymous">
+  <style>
+    /* Additional fixes only - preserves original styling */
+    .column-container {
+      border: 1px solid #434343;
+      border-radius: 2px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      padding: 5px 0;
+    }
+    .column-container > .form-group {
+      margin-left: 10px;
+      width: calc(50% - 10px);
+    }
+    input, select, textarea {
+      box-sizing: border-box;
+    }
+    input[type="text"], 
+    input[type="number"], 
+    input[type="date"], 
+    input[type="tel"], 
+    input[type="email"], 
+    input[type="month"], 
+    select {
+      width: calc(100% - 30px);
+      max-width: 400px;
+    }
+    textarea {
+      width: calc(100% - 30px);
+      max-width: 600px;
+    }
+    .card-image-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 15px;
+      margin-left: 5px;
+    }
+    .card-image-container img {
+      height: 25px;
+      width: auto;
+    }
+    .btn-dark {
+      background-color: #2c2c2c;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .btn-dark:hover {
+      background-color: #988558;
+    }
+    .form-group input[disabled] {
+      background-color: #e8e8e8;
+    }
+    #booking-form {
+      margin: 30px;
+    }
+    h2 {
+      clear: both;
+    }
+  </style>
 </head>
 
 <!-- Navigation Bar -->
@@ -70,12 +134,15 @@
 <body style="background-color: #eaeaea;">
   <form>
     <div class="container">
+
+      <!-- Section 1 -->
       <div>
         <h1>Confirm Your Reservation</h1>
         <div id="booking-form">
 
           <h2>Customer Info</h2>
           <div class="column-container">
+
             <div class="form-group">
               <label>Prefix:</label>
               <select id="prefix">
@@ -136,12 +203,12 @@
                 <option value="none">None</option>
                 <option value="ac">AC $1000</option>
                 <option value="locker">Locker $300</option>
-                <option value="both">AC + Locker $1300</option>
               </select>
             </div>
           </div>
 
           <h2 style="margin-top: 20px;">Charges</h2>
+
           <div class="column-container">
             <div class="form-group">
               <label for="advance-amount">Advance Amount:</label>
@@ -171,10 +238,10 @@
 
           <h2>Payment Information</h2>
           <div class="card-image-container">
-            <img src="https://be.synxis.com/public/images/Visa.png" alt="Visa">
-            <img src="https://be.synxis.com/public/images/MasterCard.png" alt="MasterCard">
-            <img src="https://be.synxis.com/public/images/Amex.png" alt="Amex">
-            <img src="https://be.synxis.com/public/images/Discover.png" alt="Discover">
+            <img src="https://be.synxis.com/public/images/Visa.png" alt="Card Image">
+            <img src="https://be.synxis.com/public/images/MasterCard.png" alt="Card Image">
+            <img src="https://be.synxis.com/public/images/Amex.png" alt="Card Image">
+            <img src="https://be.synxis.com/public/images/Discover.png" alt="Card Image">
           </div>
 
           <div class="column-container">
@@ -210,7 +277,7 @@
 
           <div>
             <h2>Special Requests</h2>
-            <textarea id="special-requests" name="special-requests" rows="4" cols="50" placeholder="Any special requests or preferences?"></textarea>
+            <textarea id="special-requests" name="special-requests" rows="4" cols="50" placeholder="Any special requests?"></textarea>
           </div>
 
           <div>
@@ -223,27 +290,28 @@
               Before 12:00 PM
               <br>
             </p>
+
             <h5 style="margin-left: 0;">ROOM 1 SUPERIOR SUITES</h5>
             <h6 style="margin-bottom: 0;">Guarantee Policy</h6>
             <p>Deposit of 50% plus taxes and service charge at time of booking, balance of accommodation value to be automatically taken 30 days prior to arrival.</p>
-            
+
             <h6 style="margin-bottom: 0;">Cancel Policy</h6>
             <p>In the event of cancellation, no show or change of travel dates within 30 days prior to arrival, the deposit held will be forfeited.</p>
 
             <h2>Acknowledgements</h2>
-            <div style="margin-bottom: 10px;">
+            <div style="margin-bottom: 8px;">
               <input type="checkbox" id="newsletters" style="width: auto; margin-right: 8px;">
-              <label for="newsletters" style="color:#000; margin-left: 0; display: inline-block;">Yes, I would like to receive newsletters and special offers by email.</label>
+              <label for="newsletters" style="color:#000; margin-left: 0; display: inline;">Yes, I would like to receive newsletters and special offers by email.</label>
             </div>
 
-            <div style="margin-bottom: 10px;">
+            <div style="margin-bottom: 8px;">
               <input type="checkbox" id="privacy-terms" style="width: auto; margin-right: 8px;">
-              <label for="privacy-terms" style="color:#000; margin-left: 0; display: inline-block;">* I agree with the Privacy Terms.</label>
+              <label for="privacy-terms" style="color:#000; margin-left: 0; display: inline;">* I agree with the Privacy Terms.</label>
             </div>
 
-            <div style="margin-bottom: 10px;">
+            <div style="margin-bottom: 8px;">
               <input type="checkbox" id="booking-conditions" style="width: auto; margin-right: 8px;">
-              <label for="booking-conditions" style="color:#000; margin-left: 0; display: inline-block;">* I agree with the Booking Conditions.</label>
+              <label for="booking-conditions" style="color:#000; margin-left: 0; display: inline;">* I agree with the Booking Conditions.</label>
             </div>
 
             <p>
@@ -258,6 +326,7 @@
           </div>
         </div>
       </div>
+
     </div>
   </form>
 
@@ -297,7 +366,6 @@
         let amenitiesCostPerDay = 0;
         if (amenities === "ac") amenitiesCostPerDay = 1000;
         else if (amenities === "locker") amenitiesCostPerDay = 300;
-        else if (amenities === "both") amenitiesCostPerDay = 1300;
         
         const totalRoomCost = roomRate * totalDays;
         const totalAmenitiesCost = amenitiesCostPerDay * totalDays;
@@ -307,7 +375,7 @@
         totalRoomCostInput.value = totalRoomCost ? `$. ${totalRoomCost}/-` : "-";
         totalAmenitiesCostInput.value = totalAmenitiesCost ? `$. ${totalAmenitiesCost}/-` : "-";
         totalCostInput.value = totalCost ? `$. ${totalCost}/-` : "-";
-        balanceInput.value = (totalCost && advanceAmount) ? `$. ${balance}/-` : "-";
+        balanceInput.value = (totalCost && advanceAmount > 0) ? `$. ${balance}/-` : "-";
       }
 
       roomTypeSelect.addEventListener("change", calculateCosts);
@@ -315,7 +383,6 @@
       totalDaysInput.addEventListener("input", calculateCosts);
       advanceAmountInput.addEventListener("input", calculateCosts);
       
-      // Initial calculation
       calculateCosts();
     })();
 
@@ -341,7 +408,7 @@
       if (!advance || parseFloat(advance) < 500) { alert("Advance amount must be at least $500."); return; }
       if (!privacyTerms || !bookingConditions) { alert("Please agree to Privacy Terms and Booking Conditions."); return; }
       
-      alert(`Reservation confirmed for ${customerName}!\n\nA confirmation email will be sent to ${email}.`);
+      alert("Reservation confirmed for " + customerName + "!\n\nA confirmation email will be sent to " + email + ".");
     });
   </script>
 </body>
